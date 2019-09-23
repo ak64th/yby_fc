@@ -1,6 +1,7 @@
 Celery~=4.3.0
 Django~=2.2.4
+beautifulsoup4~=4.8.0
 djangorestframework~=3.10.2
 django-filter~=2.2.0
 redis~=3.3.8
-
+scrapy~=1.7.3

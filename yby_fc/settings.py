@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'django_filters',
     'yby_fc.apps.timeline',
+    'yby_fc.apps.crawler',
 ]
 
 MIDDLEWARE = [
