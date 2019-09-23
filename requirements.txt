@@ -5,3 +5,4 @@ djangorestframework~=3.10.2
 django-filter~=2.2.0
 redis~=3.3.8
 scrapy~=1.7.3
+scrapy-user-agents~=0.1.1

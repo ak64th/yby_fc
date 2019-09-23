@@ -123,3 +123,10 @@ REST_FRAMEWORK = {
 
 CELERY_BROKER_URL = 'redis://localhost:6379/0'
 CELERY_RESULT_BACKEND = 'redis://localhost:6379/0'
+
+CRAWLER_SETTINGS = {
+    'DOWNLOADER_MIDDLEWARES': {
+        'scrapy.downloadermiddlewares.useragent.UserAgentMiddleware': None,
+        'scrapy_user_agents.middlewares.RandomUserAgentMiddleware': 400,
+    },
+}
