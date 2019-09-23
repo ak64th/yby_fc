@@ -5,6 +5,11 @@ import scrapy
 class BilibiliSpider(scrapy.Spider):
     name = 'bilibili'
     allowed_domains = ['bilibili.com']
+    custom_settings = {
+        'ITEM_PIPELINES': {
+            'yby_fc.apps.crawler.pipelines.BilibiliPipeline': 300
+        },
+    }
 
     def start_requests(self):
         yield scrapy.Request(
