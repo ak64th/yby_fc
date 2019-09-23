@@ -1,5 +1,5 @@
-API
----
+Web API
+-------
 
 .. http:get:: /api/timeline/post/
 
