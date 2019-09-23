@@ -43,3 +43,10 @@ Run development server:
 .. code:: bash
 
    python manage.py runserver
+
+
+Run celery worker:
+
+.. code:: bash
+
+   celery -A yby_fc worker -l debug
