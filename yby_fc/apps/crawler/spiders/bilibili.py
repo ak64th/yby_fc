@@ -2,6 +2,7 @@ import datetime
 
 import bs4
 import dateutil.parser
+import furl
 import scrapy
 
 
@@ -32,6 +33,21 @@ class BilibiliSpider(scrapy.Spider):
         )
 
     def parse(self, response):
+        done = False
         soup = bs4.BeautifulSoup(response.text, features='lxml')
-        print(self.back_to)
-        print(soup.title.get_text())
+        for node in soup.select('.video-item'):
+            time = node.select_one('.time').get_text().strip()
+            if dateutil.parser.parse(time).date() < self.back_to.date():
+                done = True
+                break
+            link = node.select_one('a.title')
+            title = link.attrs['title']
+            href = link.attrs['href']
+            video_id = furl.furl(href).path.segments[-1]
+            watch_num = node.select_one('.watch-num').get_text().strip()
+            print(video_id, title, watch_num, time)
+        if not done:
+            f = furl.furl(response.url)
+            page = int(f.query.params.get('page', 1))
+            f.query.params['page'] = str(page + 1)
+            yield scrapy.Request(f.url)
