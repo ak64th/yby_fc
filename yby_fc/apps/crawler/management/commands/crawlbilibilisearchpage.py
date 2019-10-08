@@ -3,7 +3,7 @@ import datetime
 from django.core.management.base import BaseCommand
 from django.utils import timezone
 
-from yby_fc.apps.crawler.tasks import crawl
+from yby_fc.apps.crawler.crawl import crawl_bilibili_search_page
 
 
 class Command(BaseCommand):
@@ -16,5 +16,7 @@ class Command(BaseCommand):
         )
 
     def handle(self, *args, **options):
-        back_to = timezone.now() - datetime.timedelta(options['days'])
-        crawl.apply(kwargs={'back_to': back_to}, throw=True)
+        within_days = options['days']
+        back_to = (timezone.now() - datetime.timedelta(within_days)
+                   if within_days else None)
+        crawl_bilibili_search_page(back_to)
